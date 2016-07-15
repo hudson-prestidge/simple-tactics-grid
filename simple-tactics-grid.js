@@ -33,7 +33,9 @@ function select (tile) {
   if (tileIsSelected()) {
     deselect(selectedTile)
   } colorSelected(tile)
-  selectedTile = tile
+  if (tile.childNodes[1]) {
+    displayMoveRange(tile.childNodes[1])
+  } selectedTile = tile
 }
 
 function deselect (tile) {
@@ -56,11 +58,13 @@ function addUnit (tile) {
   units.push(newUnit)
 }
 
-function removeUnit (tile) {
-  tile.removeChild(tile.childNodes[1])
-}
+// function removeUnit (tile) {
+// }
 
 function moveUnit (start, end) {
-  removeUnit(selectedTile)
-  addUnit(end)
+  end.appendChild(selectedTile.childNodes[1])
+}
+
+function displayMoveRange (unit) {
+
 }
