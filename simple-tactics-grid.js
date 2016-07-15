@@ -68,3 +68,11 @@ function moveUnit (start, end) {
 function displayMoveRange (unit) {
 
 }
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'.split('')
+  var color = '#'
+  for (var i = 0; i < 5; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  } return color
+}
