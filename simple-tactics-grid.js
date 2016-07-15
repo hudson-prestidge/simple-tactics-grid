@@ -5,10 +5,20 @@ var units = []
 
 function start () {
   // var rows = document.getElementsByClassName('row')
+  addGridListener(document.getElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
   for (var i = 0; i < tiles.length; i++) {
     addTileListeners(tiles[i])
   } addUnit(tiles[0])
+}
+
+function addGridListener (grid) {
+  grid.addEventListener('contextmenu', function (evt) {
+    evt.preventDefault()
+    if (tileIsSelected()) {
+      deselect(selectedTile)
+    }
+  })
 }
 
 function addTileListeners (tile) {
@@ -16,12 +26,6 @@ function addTileListeners (tile) {
     if (tileIsSelected() && selectedTile.childNodes[1]) {
       moveUnit(selectedTile, tile)
     }select(tile)
-  })
-  tile.addEventListener('contextmenu', function (evt) {
-    evt.preventDefault()
-    if (tileIsSelected()) {
-      deselect(selectedTile)
-    }
   })
 }
 
