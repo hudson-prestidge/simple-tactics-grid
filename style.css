@@ -40,7 +40,7 @@ html, body, .wrapper {
 }
 
 .unit {
-  background-color: green;
+  border: 1px #777 solid;
   margin-top: 25%;
   margin-left: 25%;
   width: 50%;

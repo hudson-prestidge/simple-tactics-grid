@@ -53,6 +53,8 @@ function tileIsSelected () {
 
 function addUnit (tile) {
   var newUnit = document.createElement('div')
+  console.log(getRandomColor())
+  newUnit.style.backgroundColor = getRandomColor()
   newUnit.className = 'unit'
   tile.appendChild(newUnit)
   units.push(newUnit)
@@ -72,7 +74,7 @@ function displayMoveRange (unit) {
 function getRandomColor() {
   var letters = '0123456789ABCDEF'.split('')
   var color = '#'
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)]
   } return color
 }
