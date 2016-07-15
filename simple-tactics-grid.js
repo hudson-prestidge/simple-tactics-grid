@@ -5,22 +5,23 @@ var units = []
 
 function start () {
   // var rows = document.getElementsByClassName('row')
-  addGridListener(document.GetElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
   for (var i = 0; i < tiles.length; i++) {
-    addTileListener(tiles[i])
+    addTileListeners(tiles[i])
   } addUnit(tiles[0])
 }
 
-function addGridListener () {
-  
-}
-
-function addTileListener (tile) {
+function addTileListeners (tile) {
   tile.addEventListener('click', function () {
     if (tileIsSelected() && selectedTile.childNodes[1]) {
       moveUnit(selectedTile, tile)
     }select(tile)
+  })
+  tile.addEventListener('contextmenu', function (evt) {
+    evt.preventDefault()
+    if (tileIsSelected()) {
+      deselect(selectedTile)
+    }
   })
 }
 
@@ -33,6 +34,7 @@ function select (tile) {
 
 function deselect (tile) {
   tile.style.backgroundColor = ''
+  selectedTile = ''
 }
 
 function colorSelected (tile) {
@@ -40,7 +42,7 @@ function colorSelected (tile) {
 }
 
 function tileIsSelected () {
-  return !(selectedTile === undefined)
+  return !(selectedTile === undefined || selectedTile === '')
 }
 
 function addUnit (tile) {
