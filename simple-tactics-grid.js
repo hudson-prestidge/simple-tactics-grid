@@ -5,15 +5,22 @@ var units = []
 
 function start () {
   // var rows = document.getElementsByClassName('row')
+  addGridListener(document.GetElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
   for (var i = 0; i < tiles.length; i++) {
     addTileListener(tiles[i])
   } addUnit(tiles[0])
 }
 
+function addGridListener () {
+  
+}
+
 function addTileListener (tile) {
   tile.addEventListener('click', function () {
-    select(tile)
+    if (tileIsSelected() && selectedTile.childNodes[1]) {
+      moveUnit(selectedTile, tile)
+    }select(tile)
   })
 }
 
@@ -41,4 +48,13 @@ function addUnit (tile) {
   newUnit.className = 'unit'
   tile.appendChild(newUnit)
   units.push(newUnit)
+}
+
+function removeUnit (tile) {
+  tile.removeChild(tile.childNodes[1])
+}
+
+function moveUnit (start, end) {
+  removeUnit(selectedTile)
+  addUnit(end)
 }
