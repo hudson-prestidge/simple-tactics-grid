@@ -37,3 +37,11 @@ html, body {
   border-radius: 5px;
   border: 1px solid #777;
 }
+
+.unit {
+  background-color: green;
+  margin-top: 25%;
+  margin-left: 25%;
+  width: 50%;
+  height: 50%;
+}

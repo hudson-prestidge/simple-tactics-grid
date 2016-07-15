@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', start)
 
 var selectedTile
+var units = []
 
 function start () {
   // var rows = document.getElementsByClassName('row')
   var tiles = document.getElementsByClassName('tile')
-  console.log(tiles)
   for (var i = 0; i < tiles.length; i++) {
     addTileListener(tiles[i])
-  }
+  } addUnit(tiles[0])
 }
 
 function addTileListener (tile) {
@@ -34,4 +34,11 @@ function colorSelected (tile) {
 
 function tileIsSelected () {
   return !(selectedTile === undefined)
+}
+
+function addUnit (tile) {
+  var newUnit = document.createElement('div')
+  newUnit.className = 'unit'
+  tile.appendChild(newUnit)
+  units.push(newUnit)
 }
