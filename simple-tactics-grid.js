@@ -71,7 +71,9 @@ function addUnit (tile) {
 // }
 
 function moveUnit (start, end) {
-  end.appendChild(selectedTile.childNodes[1])
+  if (end.style.backgroundColor === 'blue') {
+    end.appendChild(selectedTile.childNodes[1])
+  } 
 }
 
 function displayMoveRange (unit) {
