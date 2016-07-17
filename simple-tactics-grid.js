@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', start)
 
 var selectedTile = ''
+var unitDefeated = false
 
 function start () {
   addGridListener(document.getElementsByClassName('grid')[0])
@@ -43,7 +44,11 @@ function addTileListeners (tile) {
   tile.addEventListener('click', function () {
     if (tileIsSelected() && selectedTile.childNodes[1]) {
       moveUnit(selectedTile, tile)
-    }select(tile)
+    } if (!unitDefeated) {
+      select(tile)
+    } else {
+      unitDefeated = false
+    }
   })
 }
 
@@ -99,8 +104,14 @@ function removeUnit (tile) {
 }
 
 function moveUnit (start, end) {
-  if (end.style.backgroundColor === 'blue' && !(end.childNodes[1])) {
-    end.appendChild(selectedTile.childNodes[1])
+  if (end.style.backgroundColor === 'blue') {
+    if (!(end.childNodes[1])) {
+      end.appendChild(selectedTile.childNodes[1])
+    } else if (start.childNodes[1].className !== end.childNodes[1].className) {
+      end.appendChild(selectedTile.childNodes[1])
+      removeUnit(end)
+      unitDefeated = true
+    }
   }
 }
 
@@ -110,8 +121,6 @@ function displayMoveRange (unit) {
   var tiles = document.getElementsByClassName('tile')
   for (var i = 0; i < tiles.length; i++) {
     var destinationPos = tiles[i].id.split('-')
-    // work out if the tile can be moved to. we need to work out if the distance is < the moverange. distance = number of
-    // squares to move on x axis + number of squares to move on y axis
     if ((Math.abs(currentPos[1] - destinationPos[1]) + Math.abs(currentPos[2] - destinationPos[2]) < 3)) {
       tiles[i].style.backgroundColor = 'blue'
     }
