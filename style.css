@@ -47,6 +47,13 @@ html, body, .wrapper {
   height: 50%;
 }
 
+.header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 .footer {
   position:absolute;
   bottom: 0;
