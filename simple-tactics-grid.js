@@ -4,6 +4,8 @@ var selectedTile = ''
 var unitDefeated = false
 var circleDeaths = 0
 var squareDeaths = 0
+var addSquare = false
+var addCircle = false
 
 function start () {
   addGridListener(document.getElementsByClassName('grid')[0])
@@ -11,12 +13,18 @@ function start () {
   document.getElementsByClassName('add-circle-unit-btn')[0].addEventListener('click', function () {
     if (tileIsSelected()) {
       addCircleUnit(selectedTile)
-    } deselect()
+      deselect()
+    } else {
+      addCircle = true
+    }
   })
   document.getElementsByClassName('add-square-unit-btn')[0].addEventListener('click', function () {
     if (tileIsSelected()) {
       addSquareUnit(selectedTile)
-    } deselect()
+      deselect()
+    } else {
+      addSquare = true
+    }
   })
   document.getElementsByClassName('remove-unit-btn')[0].addEventListener('click', function () {
     if (tileIsSelected()) {
@@ -46,11 +54,19 @@ function addGridListener (grid) {
 
 function addTileListeners (tile) {
   tile.addEventListener('click', function () {
-    if (tileIsSelected() && selectedTile.childNodes[1]) {
+    if (addCircle) {
+      addCircleUnit(tile)
+      deselect()
+    } else if (addSquare) {
+      addSquareUnit(tile)
+      deselect()
+    } else if (tileIsSelected() && selectedTile.childNodes[1]) {
       moveUnit(selectedTile, tile)
-    } if (!unitDefeated) {
+    } if (!unitDefeated && !addSquare && !addCircle) {
       select(tile)
     } else {
+      addCircle = false
+      addSquare = false
       unitDefeated = false
       updateDeaths()
     }
