@@ -9,14 +9,13 @@ html, body, .wrapper {
   height: 100%;
   margin: 0;
   box-sizing: border-box;
+  background-color: #999;
 }
 
 #square-deaths, #circle-deaths {
   display: inline;
   padding: 7px;
 }
-
-
 
 .grid {
   display: block;
@@ -28,6 +27,7 @@ html, body, .wrapper {
   transform: translate(-50%, -50%);
   width: 450px;
   height: 450px;
+  background-color: #777;
 }
 
 .row {
@@ -43,7 +43,8 @@ html, body, .wrapper {
   height: 100%;
   display: inline-block;
   border-radius: 5px;
-  border: 1px solid #777;
+  border: 1px solid black;
+  background-color: white;
 }
 
 .square-unit {
