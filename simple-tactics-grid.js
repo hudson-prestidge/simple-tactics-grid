@@ -4,7 +4,6 @@ var selectedTile
 var units = []
 
 function start () {
-  // var rows = document.getElementsByClassName('row')
   addGridListener(document.getElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
   for (var i = 0; i < tiles.length; i++) {
@@ -16,7 +15,7 @@ function addGridListener (grid) {
   grid.addEventListener('contextmenu', function (evt) {
     evt.preventDefault()
     if (tileIsSelected()) {
-      deselect(selectedTile)
+      deselect()
     }
   })
 }
@@ -32,14 +31,18 @@ function addTileListeners (tile) {
 function select (tile) {
   if (tileIsSelected()) {
     deselect(selectedTile)
-  } colorSelected(tile)
+  } selectedTile = tile 
+  colorSelected(tile)
   if (tile.childNodes[1]) {
     displayMoveRange(tile.childNodes[1])
-  } selectedTile = tile
+  } 
 }
 
-function deselect (tile) {
-  tile.style.backgroundColor = ''
+function deselect () {
+  var tiles = document.getElementsByClassName('tile')
+  for (var i = 0; i < tiles.length; i++) {
+    tiles[i].style.backgroundColor = ''
+  }
   selectedTile = ''
 }
 
@@ -53,7 +56,6 @@ function tileIsSelected () {
 
 function addUnit (tile) {
   var newUnit = document.createElement('div')
-  console.log(getRandomColor())
   newUnit.style.backgroundColor = getRandomColor()
   newUnit.className = 'unit'
   tile.appendChild(newUnit)
@@ -68,7 +70,17 @@ function moveUnit (start, end) {
 }
 
 function displayMoveRange (unit) {
-
+  var currentTile = unit.parentElement
+  var currentPos = currentTile.id.split('-')
+  var tiles = document.getElementsByClassName('tile')
+  for (var i = 0; i < tiles.length; i++) {
+    var destinationPos = tiles[i].id.split('-')
+    // work out if the tile can be moved to. we need to work out if the distance is < the moverange. distance = number of
+    // squares to move on x axis + number of squares to move on y axis
+    if ((Math.abs(currentPos[1] - destinationPos[1]) + Math.abs(currentPos[2] - destinationPos[2]) < 3)) {
+      tiles[i].style.backgroundColor = 'blue'
+    }
+  } selectedTile.style.backgroundColor = 'red'
 }
 
 function getRandomColor () {
