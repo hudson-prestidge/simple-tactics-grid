@@ -26,7 +26,9 @@ function start () {
   document.getElementsByClassName('reset-board-btn')[0].addEventListener('click', function () {
     for (var i = 0; i < tiles.length; i++) {
       removeUnit(tiles[i])
-    }
+    } circleDeaths = 0
+    squareDeaths = 0
+    updateDeaths
   })
   for (var i = 0; i < tiles.length; i++) {
     addTileListeners(tiles[i])
