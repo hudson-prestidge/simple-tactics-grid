@@ -1,19 +1,23 @@
 document.addEventListener('DOMContentLoaded', start)
 
 var selectedTile = ''
-var units = []
 
 function start () {
   addGridListener(document.getElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
   document.getElementsByClassName('add-unit-btn')[0].addEventListener('click', function () {
-    if (tileIsSelected() && !(selectedTile.childNodes[1])) {
+    if (tileIsSelected()) {
       addUnit(selectedTile)
     } deselect()
   })
+  document.getElementsByClassName('remove-unit-btn')[0].addEventListener('click', function () {
+    if (tileIsSelected()) {
+      removeUnit(selectedTile)
+    }
+  })
   for (var i = 0; i < tiles.length; i++) {
     addTileListeners(tiles[i])
-  } addUnit(tiles[0])
+  }
 }
 
 function addGridListener (grid) {
@@ -60,20 +64,25 @@ function tileIsSelected () {
 }
 
 function addUnit (tile) {
-  var newUnit = document.createElement('div')
-  newUnit.style.backgroundColor = getRandomColor()
-  newUnit.className = 'unit'
-  tile.appendChild(newUnit)
-  units.push(newUnit)
+  if (!(tile.childNodes[1])) {
+    var newUnit = document.createElement('div')
+    newUnit.style.backgroundColor = getRandomColor()
+    newUnit.className = 'unit'
+    tile.appendChild(newUnit)
+  }
 }
 
-// function removeUnit (tile) {
-// }
+function removeUnit (tile) {
+  if (tile.childNodes[1]) {
+    tile.removeChild(tile.childNodes[1])
+    deselect()
+  }
+}
 
 function moveUnit (start, end) {
-  if (end.style.backgroundColor === 'blue') {
+  if (end.style.backgroundColor === 'blue' && !(end.childNodes[1])) {
     end.appendChild(selectedTile.childNodes[1])
-  } 
+  }
 }
 
 function displayMoveRange (unit) {
