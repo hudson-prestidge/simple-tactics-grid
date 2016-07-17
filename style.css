@@ -19,20 +19,20 @@ html, body, .wrapper {
   border: 2px solid #000;
   border-radius: 5px;
   transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
 }
 
 .row {
-  height: 15%;
-  margin: 2.5% 0;
+  height: 7.5%;
+  margin: 1.25% 0;
   width: 100%;
   display: inline-block;
 }
 
 .tile {
-  width: 15%;
-  margin: 0 2.5%;
+  width: 7.5%;
+  margin: 0 1.25%;
   height: 100%;
   display: inline-block;
   border-radius: 5px;
@@ -48,7 +48,7 @@ html, body, .wrapper {
 }
 
 .footer {
-  position: absolute;
+  position:absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
