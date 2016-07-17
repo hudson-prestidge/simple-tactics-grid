@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', start)
 
-var selectedTile
+var selectedTile = ''
 var units = []
 
 function start () {
   addGridListener(document.getElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
+  document.getElementsByClassName('add-unit-btn')[0].addEventListener('click', function () {
+    if (tileIsSelected() && !(selectedTile.childNodes[1])) {
+      addUnit(selectedTile)
+    } deselect()
+  })
   for (var i = 0; i < tiles.length; i++) {
     addTileListeners(tiles[i])
   } addUnit(tiles[0])
@@ -31,11 +36,11 @@ function addTileListeners (tile) {
 function select (tile) {
   if (tileIsSelected()) {
     deselect(selectedTile)
-  } selectedTile = tile 
+  } selectedTile = tile
   colorSelected(tile)
   if (tile.childNodes[1]) {
     displayMoveRange(tile.childNodes[1])
-  } 
+  }
 }
 
 function deselect () {
