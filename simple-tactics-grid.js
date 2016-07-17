@@ -28,7 +28,7 @@ function start () {
       removeUnit(tiles[i])
     } circleDeaths = 0
     squareDeaths = 0
-    updateDeaths
+    updateDeaths()
   })
   for (var i = 0; i < tiles.length; i++) {
     addTileListeners(tiles[i])
