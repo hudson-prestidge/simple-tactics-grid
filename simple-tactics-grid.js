@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', start)
 
 var selectedTile = ''
 var unitDefeated = false
+var circleDeaths = 0
+var squareDeaths = 0
 
 function start () {
   addGridListener(document.getElementsByClassName('grid')[0])
@@ -48,6 +50,7 @@ function addTileListeners (tile) {
       select(tile)
     } else {
       unitDefeated = false
+      updateDeaths()
     }
   })
 }
@@ -109,6 +112,11 @@ function moveUnit (start, end) {
       end.appendChild(selectedTile.childNodes[1])
     } else if (start.childNodes[1].className !== end.childNodes[1].className) {
       end.appendChild(selectedTile.childNodes[1])
+      if (end.childNodes[1].className.split('-')[0] === 'square') {
+        squareDeaths++
+      } else {
+        circleDeaths++
+      }
       removeUnit(end)
       unitDefeated = true
     }
@@ -133,4 +141,9 @@ function getRandomColor () {
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)]
   } return color
+}
+
+function updateDeaths () {
+  document.getElementById('circle-deaths').innerHTML = 'Circle Deaths: ' + circleDeaths
+  document.getElementById('square-deaths').innerHTML = 'Square Deaths: ' + squareDeaths
 }

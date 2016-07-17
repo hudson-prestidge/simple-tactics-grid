@@ -11,6 +11,13 @@ html, body, .wrapper {
   box-sizing: border-box;
 }
 
+#square-deaths, #circle-deaths {
+  display: inline;
+  padding: 7px;
+}
+
+
+
 .grid {
   display: block;
   position: relative;
