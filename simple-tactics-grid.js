@@ -15,6 +15,11 @@ function start () {
       removeUnit(selectedTile)
     }
   })
+  document.getElementsByClassName('reset-board-btn')[0].addEventListener('click', function () {
+    for (var i = 0; i < tiles.length; i++) {
+      removeUnit(tiles[i])
+    }
+  })
   for (var i = 0; i < tiles.length; i++) {
     addTileListeners(tiles[i])
   }
