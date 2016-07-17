@@ -5,9 +5,14 @@ var selectedTile = ''
 function start () {
   addGridListener(document.getElementsByClassName('grid')[0])
   var tiles = document.getElementsByClassName('tile')
-  document.getElementsByClassName('add-unit-btn')[0].addEventListener('click', function () {
+  document.getElementsByClassName('add-circle-unit-btn')[0].addEventListener('click', function () {
     if (tileIsSelected()) {
-      addUnit(selectedTile)
+      addCircleUnit(selectedTile)
+    } deselect()
+  })
+  document.getElementsByClassName('add-square-unit-btn')[0].addEventListener('click', function () {
+    if (tileIsSelected()) {
+      addSquareUnit(selectedTile)
     } deselect()
   })
   document.getElementsByClassName('remove-unit-btn')[0].addEventListener('click', function () {
@@ -68,11 +73,20 @@ function tileIsSelected () {
   return !(selectedTile === undefined || selectedTile === '')
 }
 
-function addUnit (tile) {
+function addCircleUnit (tile) {
   if (!(tile.childNodes[1])) {
     var newUnit = document.createElement('div')
     newUnit.style.backgroundColor = getRandomColor()
-    newUnit.className = 'unit'
+    newUnit.className = 'circle-unit'
+    tile.appendChild(newUnit)
+  }
+}
+
+function addSquareUnit (tile) {
+  if (!(tile.childNodes[1])) {
+    var newUnit = document.createElement('div')
+    newUnit.style.backgroundColor = getRandomColor()
+    newUnit.className = 'square-unit'
     tile.appendChild(newUnit)
   }
 }
